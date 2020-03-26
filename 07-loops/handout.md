@@ -17,9 +17,46 @@ Dump of assembler code for function ex1:
    0x067a <+16>:	retq   
 ``` 
 
+```asm
+lea (%rcx, %rcx, 2), %ecx
+```
+1. No codigo acima o lea faz a conta e = rcx + 2*rcx e guarda o resultado em um espaco de memoria de rcx chamado de ecx que ocupa metade do registrador inteiro. Isso faz com que rcx seja sobescrito com o resultado dessa conta menos os 32 bits da esquerda (que ficam igual a 0).
+
 1. Quantos argumentos a função recebe? Quais seus tipos? Ela retorna algo? O quê? \vspace{5em}
+3 argumentos rsi (long), rdi(long), rdx(long) e rcx(long)
+Retorna eax (int)
+
 1. Traduza o programa acima linha a linha. \vspace{10em}
+
+- i = rsi + 2*rdi
+- e = rdx + 2*rdx
+- i = i + e
+- j = rcx + 2*rcx
+- e = rcx + rcx
+- i = eax + e
+
+- %eax = %rsi + 2*%rdi
+- %edx = %rdx + 2*%rdx
+- %eax = %eax + %edx
+- %ecx = %rcx + 2*%rcx
+- %edx = %rcx + %rcx
+- %eax = %eax + %edx
+
 1. Escreva uma versão legível do programa acima. \newpage
+
+```asm
+
+int main(long rsi, long rdi, long rdx, long rcx) {
+   int i = rsi + 2*rdi
+   int e = rdx + 2*rdx
+   i = i + e
+   int j = rcx + 2*rcx
+   e = rcx + rcx
+   i = eax + e
+   return i
+}
+
+```
 
 **Exercício 2**: 
 
@@ -36,6 +73,9 @@ Dump of assembler code for function ex2:
 ```
 
 1. Quantos argumentos a função recebe? Quais seus tipos? Ela retorna algo? O quê? \vspace{5em}
+3 argumentos rdx (int), esi(int) e edi(int).
+
+
 1. A função acima faz uma comparação. Qual e entre quais variáveis? \vspace{5em}
 1. As instruções nas linhas `ex2+4` e `ex2+12` fazem acessos a memória. Qual o tipo da variável destino?  \vspace{5em}
 1. Faça uma tradução da função acima usando somente `if-goto` \vspace{10em}
