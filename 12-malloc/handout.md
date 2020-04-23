@@ -8,11 +8,11 @@
 
 **a)** Analisando seu código-fonte, o que este programa faz?  \vspace{3em}
 
-- Libera espaço na memória usando a função malloc para 4*11 bytes criando um vetor com 11 elementos e fazendo o print logo abaixo de cada um dos elementos.
+- Libera espaço na memória usando a função malloc para 4*N bytes criando um vetor com N+1 elementos e fazendo o print logo abaixo de cada um dos elementos.
 
 **b)** Na execução deste programa, existe alguma possibilidade da alocação dinâmica com `malloc` falhar? Caso sim, indique as situações onde isto poderia acontecer. \vspace{3em}
 
-- No caso a alocação de memória está sendo feita para 11 elementos mas no "for" estão sendo colocados 12 elementos.
+- No caso a alocação de memória está sendo feita para N elementos mas no "for" estão sendo colocados N+1 elementos.
 
 **c)** O seu programa libera toda memória que aloca? Se não, aponte onde ele deveria fazer isto. \vspace{3em}
 
@@ -26,7 +26,7 @@
 
 **b)** O comportamento de seu programa muda conforme N? Vá incrementando de um em um e veja o que acontece. Você consegue explicar por que? Discuta com seu grupo e valide sua resposta com o professor. \vspace{4em}
 
-- Não muda de comportamento. Apenas muda o número de elementos. O que era para ser 11 elementos vira 12 elementos.
+- Não muda de comportamento. Apenas muda o número de elementos. O que era para ser 11 elementos vira 12 elementos. No número N = 14 o programa quebra.
 
 **b)** Existem três problemas no código. O primeiro (`vetor` não é desalocado) já indetificamos no exercíco anterior. Você consegue identificar os outros dois? Corrija-os e salve o programa em um arquivo *ex1-certo.c*. \vspace{3em}
 
@@ -53,13 +53,17 @@ Para que os problemas encontrados pelo Valgrind sejam mais facilmente identifica
 
 **a)** Rode o Valgrind com `valgrind --leak-check=yes ./ex1`. Quais foram os problemas encontrados e em quais linhas do código?  \vspace{3em}
 
-- Invalid write of size 4 falando que foi escrito um int amais inválido.
+- Invalid write of size 4 falando que foi escrito um int amais inválido (ex1.c:11).
+
+- Invalid read of size 4 falando que foi lido um int amais inválido (ex1.c:15).
 
 **b)** O quê significa o primeiro erro? Como corrigí-lo?  \vspace{3em}
 
-- Invalid read of size 4 falando que foi lido um int amais inválido.
+- Invalid write of size 4 falando que foi escrito um int amais inválido. Remover o = do for.
 
 **c)** O quê significa o segundo erro? Como corrigí-lo?  \vspace{3em}
+
+- Invalid read of size 4 falando que foi escrito um int amais inválido. Remover o = do for.
 
 **d)** A seção *HEAP SUMMARY* faz um resumo dos dados alocados/desalocados no seu programa. Ela mostra algum problema? Se sim, qual linha de código é apontada? Qual é o problema diagnosticado por este aviso?  \vspace{3em}
 
