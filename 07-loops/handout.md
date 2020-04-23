@@ -123,9 +123,44 @@ Dump of assembler code for function soma_n:
 
 ```
 
-1. Desenhe as flechas indicando o destino de cada instrução de pulo (`jmp` ou `j*`).
+1. Desenhe as flechas indicando o destino de cada instrução de pulo (`jmp` ou `j*`)
+
+-> Jump para a linha <+21>
+
+```asm
+jmp    0x67f <soma_n+21>
+```
+
+-> Jump para a linha <+12>
+
+```asm
+jl     0x676 <soma_n+12>
+```
+
+-> A instrucao 'jl' compara se eh igual a menor que 0
+
+```asm
+edi - edx < 0
+```
+
+-> A instrucao 'movslq' transforma um int em um long.
+
+```asm
+movslq %edx,%rcx
+```
+
 1. Escreva abaixo o cabeçalho da função `soma_n`. **Dica**: procure por registradores que são lidos *antes* de serem escritos. \vspace{3em}
+
+-> A ultima instrucao antes do return eh uma instrucao que salva num registrador de 8 bytes, portanto, return um int.
+
+```asm
+int soma_n(int a, long b)
+```
+
 1. Faça a tradução do código acima para *C* usando somente `if-goto`\vspace{13em}
+
+
+
 1. Converta o código acima para uma versão legível em *C*. \vspace{10em}
 
 \newpage
